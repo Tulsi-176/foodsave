@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Share A Meal | Food Donation</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: Arial, sans-serif; color: #26352d; background: #f7faf5; }
+    header {
+      min-height: 430px; color: white; padding: 28px 8%;
+      background: linear-gradient(90deg, rgba(15,55,37,.88), rgba(15,55,37,.35)),
+      url("https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1600&q=85") center/cover;
+    }
+    nav { display:flex; justify-content:space-between; align-items:center; gap:15px; flex-wrap:wrap; }
+    .logo { font-size: 25px; font-weight: 800; }
+    nav a { color:white; text-decoration:none; margin-left:18px; font-weight:600; }
+    .hero { max-width:650px; padding:70px 0 35px; }
+    .hero h1 { font-size: clamp(36px, 6vw, 58px); line-height:1.05; margin:0 0 18px; }
+    .hero p { font-size:18px; line-height:1.6; }
+    .btn { display:inline-block; background:#f4b942; color:#23372b; border:0; border-radius:9px; padding:13px 20px; font-weight:700; text-decoration:none; cursor:pointer; }
+    main { width:min(1100px, 90%); margin:38px auto; }
+    .intro { text-align:center; max-width:720px; margin:0 auto 30px; }
+    .intro h2, section h2 { color:#1e5638; }
+    .features { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:16px; margin:28px 0 45px; }
+    .feature, .panel, .food-card { background:white; border-radius:15px; padding:20px; box-shadow:0 5px 20px #183c2410; }
+    .feature .emoji { font-size:30px; }
+    .content-grid { display:grid; grid-template-columns: minmax(0,1fr) minmax(280px,.8fr); gap:25px; align-items:start; }
+    label { display:block; font-weight:700; margin:13px 0 6px; }
+    input, select, textarea { width:100%; padding:12px; border:1px solid #ccd8ce; border-radius:8px; font:inherit; background:#fff; }
+    textarea { min-height:75px; resize:vertical; }
+    .hint { color:#66756a; font-size:13px; line-height:1.5; }
+    .food-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:15px; margin-top:18px; }
+    .food-card h3 { margin:0 0 8px; color:#1e5638; }
+    .food-card p { margin:7px 0; line-height:1.45; }
+    .food-card a { display:inline-block; margin-top:10px; color:#17663d; font-weight:700; }
+    .tag { display:inline-block; background:#e8f4e9; color:#1e5638; border-radius:20px; padding:5px 10px; font-size:12px; font-weight:700; }
+    .notice { background:#fff6df; border-left:4px solid #e8b23e; padding:13px 15px; border-radius:7px; line-height:1.5; margin:18px 0; }
+    footer { text-align:center; padding:28px 15px; background:#173e2b; color:white; margin-top:45px; }
+    button:hover, .btn:hover { filter:brightness(.96); }
+    @media(max-width:750px) { .content-grid { grid-template-columns:1fr; } header { min-height:400px; } nav a { margin:0 12px 0 0; } }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">🥗 Share A Meal</div>
+      <div><a href="#how">How it works</a><a href="#donate">Donate food</a><a href="#available">Available food</a></div>
+    </nav>
+    <div class="hero">
+      <h1>Good food deserves another chance.</h1>
+      <p>Have extra food after a party or family function? Share it with nearby NGOs, orphanages and old-age homes instead of letting it go to waste.</p>
+      <a class="btn" href="#donate">Share food today</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="intro" id="how">
+      <h2>Every bite counts</h2>
+      <p>Share A Meal connects people who have safe, surplus food with organisations and community groups that can distribute it to people who need it.</p>
+    </section>
+
+    <div class="features">
+      <div class="feature"><div class="emoji">🍱</div><h3>Post extra food</h3><p>Tell others what food is available and how much you can share.</p></div>
+      <div class="feature"><div class="emoji">🏠</div><h3>Find nearby support</h3><p>NGOs, orphanages and old-age homes can contact the donor.</p></div>
+      <div class="feature"><div class="emoji">📞</div><h3>Connect directly</h3><p>Use the listed phone number to discuss pickup and location.</p></div>
+    </div>
+
+    <div class="content-grid">
+      <section class="panel" id="donate">
+        <h2>Donate surplus food</h2>
+        <p class="hint">Fill in the details so a nearby organisation can contact you.</p>
+        <form id="foodForm">
+          <label for="food">Food / dish name *</label>
+          <input id="food" required placeholder="Example: Vegetable rice, chapatis">
+          <label for="quantity">Quantity available *</label>
+          <input id="quantity" required placeholder="Example: 25 meal boxes">
+          <label for="type">Food category</label>
+          <select id="type">
+            <option>Cooked meal</option><option>Fruits and vegetables</option><option>Packaged food</option><option>Other</option>
+          </select>
+          <label for="prepared">When was it prepared? *</label>
+          <input id="prepared" required type="datetime-local">
+          <label for="pickup">Pickup location / area *</label>
+          <input id="pickup" required placeholder="Area, city, nearby landmark">
+          <label for="phone">Contact phone number *</label>
+          <input id="phone" required type="tel" inputmode="tel" placeholder="Enter phone number">
+          <label for="notes">Extra information</label>
+          <textarea id="notes" placeholder="Pickup time, storage details, ingredients/allergens, etc."></textarea>
+          <p class="hint">Your contact number will appear on this device's demo listing. Only share a number you are comfortable making public.</p>
+          <button class="btn" type="submit">Post food availability</button>
+        </form>
+      </section>
+
+      <aside class="panel">
+        <h2>For NGOs & care homes</h2>
+        <p>If your organisation needs food, check the listings and contact the donor directly. Confirm the quantity, ingredients, preparation time and pickup arrangements before accepting.</p>
+        <div class="notice"><strong>Food safety matters:</strong> Accept only food that has been handled and stored safely. Do not distribute food if its safety is uncertain, and follow local food-safety guidance.</div>
+        <h3>What to confirm</h3>
+        <ul>
+          <li>Food preparation time</li>
+          <li>Quantity and ingredients</li>
+          <li>Safe storage and transport</li>
+          <li>Pickup location and time</li>
+        </ul>
+      </aside>
+    </div>
+
+    <section id="available" style="margin-top:42px">
+      <h2>Food available for sharing</h2>
+      <p class="hint">Demo listings are saved only in this browser. They are not automatically visible to other people.</p>
+      <input id="search" placeholder="Search by dish or location..." aria-label="Search food listings">
+      <div class="food-list" id="foodList"></div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>Share A Meal</strong><br>
+    Reducing food waste, one meal at a time. 💚
+  </footer>
+
+  <script>
+    const starterListings = [
+      {food:"Vegetable pulao", quantity:"15 meal boxes", type:"Cooked meal", prepared:"Today, 1:00 PM", pickup:"Example: Ameerpet, Hyderabad", phone:"9000000000", notes:"Sample listing only — contact details are placeholders."},
+      {food:"Fresh bananas", quantity:"2 crates", type:"Fruits and vegetables", prepared:"Today, 10:00 AM", pickup:"Example: Kukatpally, Hyderabad", phone:"9000000001", notes:"Sample listing only — contact details are placeholders."}
+    ];
+
+    let listings = JSON.parse(localStorage.getItem("shareAMealListings") || "null") || starterListings;
+    const list = document.getElementById("foodList");
+
+    function escapeHTML(value) {
+      return String(value).replace(/[&<>"']/g, char => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[char]));
+    }
+
+    function renderListings(filter = "") {
+      const filtered = listings.filter(item =>
+        (item.food + " " + item.pickup + " " + item.type).toLowerCase().includes(filter.toLowerCase())
+      );
+      list.innerHTML = "";
+      if (!filtered.length) {
+        list.innerHTML = "<p>No matching food listings yet.</p>";
+        return;
+      }
+      filtered.forEach(item => {
+        const card = document.createElement("article");
+        card.className = "food-card";
+        const message = `Hello, I am contacting you about ${item.food} (${item.quantity}) available at ${item.pickup}.`;
+        const phoneDigits = item.phone.replace(/\D/g, "");
+        const whatsapp = `https://wa.me/${phoneDigits}?text=${encodeURIComponent(message)}`;
+        card.innerHTML = `
+          <span class="tag">${escapeHTML(item.type)}</span>
+          <h3>${escapeHTML(item.food)}</h3>
+          <p><strong>Quantity:</strong> ${escapeHTML(item.quantity)}</p>
+          <p><strong>Prepared:</strong> ${escapeHTML(item.prepared)}</p>
+          <p><strong>Pickup:</strong> ${escapeHTML(item.pickup)}</p>
+          <p><strong>Contact:</strong> ${escapeHTML(item.phone)}</p>
+          <p>${escapeHTML(item.notes || "")}</p>
+          <a href="tel:${phoneDigits}">Call donor</a> &nbsp;|&nbsp;
+          <a href="${whatsapp}" target="_blank" rel="noopener">WhatsApp</a>`;
+        list.appendChild(card);
+      });
+    }
+
+    document.getElementById("foodForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      const phone = document.getElementById("phone").value.trim();
+      if (phone.replace(/\D/g, "").length < 10) {
+        alert("Please enter a valid phone number.");
+        return;
+      }
+      const preparedValue = document.getElementById("prepared").value;
+      const prepared = preparedValue ? new Date(preparedValue).toLocaleString() : "";
+      const newListing = {
+        food:document.getElementById("food").value.trim(),
+        quantity:document.getElementById("quantity").value.trim(),
+        type:document.getElementById("type").value,
+        prepared,
+        pickup:document.getElementById("pickup").value.trim(),
+        phone,
+        notes:document.getElementById("notes").value.trim()
+      };
+      listings.unshift(newListing);
+      localStorage.setItem("shareAMealListings", JSON.stringify(listings));
+      renderListings(document.getElementById("search").value);
+      this.reset();
+      alert("Your demo listing has been posted on this device.");
+    });
+
+    document.getElementById("search").addEventListener("input", event => renderListings(event.target.value));
+    renderListings();
+  </script>
+</body>
+</html>
